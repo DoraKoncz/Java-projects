@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliente ricette</title>
+</head>
+<body>
+    <h1>Cliente ricette</h1>
+
+    <button onclick="caricaRicette()">Tutte le Ricette</button>
+    <button id="btnTabella">Tabella Ricette</button>
+
+    <ul id="listRicette">
+
+    </ul>
+
+    <script>
+
+        
+        const url = "http://localhost:8080/Prj27_RicetteRegionali/api/ricette";
+        const btnTab = document.getElementById('btnTabella');
+
+        function caricaRicette() {
+
+            const lista = document.createElement('ul');
+
+            fetch(URL).then(ricette => ricette.json()).then(rJson => {
+                for(let ricetta of rJson){
+                    console.log(ricetta);
+                    let LI = document.createElement('li');
+                    LI.textContent = ricetta.nome;
+                    lista.appendChild(LI);
+                }
+
+                document.doby.appendChild(lista);
+            })
+        }
+
+        btnTab.onclick = function(){
+
+            const tabella = document.createElement('table');
+            fetch(URL).then(ricette => ricette.json()).then(rJson => {
+            for(let ricetta of rJson){
+                const riga = document.createElement('tr');
+                const tabella = document.createElement('table');
+                  td.textContent = ricetta.nome;
+                  riga.appendChild(td);
+                  tabella.appendChild(riga); 
+                }
+
+                document.doby.appendChild(tabella);
+            })
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Scegli cantante</title>
+</head>
+<body>
+    <select name="" id="cantanti">
+
+
+    </select>
+    <ul id="listaBrani"></ul>
+
+    <script>
+
+        const URL = "http://localhost:8080/Prj30_Jukebox/api/canzoni"
+
+        const ELENCO = document.getElementById('cantanti');
+        const LISTA = document.getElementById('listaBrani');
+
+        function riempiTendina() {
+
+            fetch(URL).then(c => c.json()).then(cjson => {
+                for (const cantante of cjson) {
+
+                    const OPTION = document.createElement('option');
+                    OPTION.value = cantante;
+                    OPTION.textContent = cantante;
+                    ELENCO.appendChild(OPTION);
+
+                }
+            })
+        }
+
+        ELENCO.onchange = function () {
+
+            let cantante = ELENCO.value;
+
+            fetch(URL + "?cantante=" + cantante).then(j => json()).then(cjs => {
+                LISTA.innerHTML = '';
+
+                for (const canzone of cjs) {
+                    const LI = document.createElement('li');
+                    LI.textContent = canzone.titolo;
+                    LISTA.appendChild(LI);
+                }
+            })
+
+
+
+        }
+
+        riempiTendina();
+    </script>
+
+</body>
+</html>
